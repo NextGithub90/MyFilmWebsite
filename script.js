@@ -33,7 +33,7 @@ async function showDetails(imdbid) {
   const detailsModal = new bootstrap.Modal(document.getElementById("details"));
   detailsModal.show();
 
-  const response = await fetch("http://www.omdbapi.com/?apikey=18d0aa6e&i=" + imdbid);
+  const response = await fetch("//www.omdbapi.com/?apikey=18d0aa6e&i=" + imdbid);
   const movie = await response.json();
 
   const details = aboutDetails(movie);
@@ -42,7 +42,7 @@ async function showDetails(imdbid) {
 }
 
 async function showdata(value) {
-  return fetch("http://www.omdbapi.com/?apikey=18d0aa6e&s=" + value)
+  return fetch("//www.omdbapi.com/?apikey=18d0aa6e&s=" + value)
     .then((response) => response.json())
     .then((response) => {
       if (response.Response === "False") {
