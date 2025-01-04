@@ -1,13 +1,28 @@
 const inputButton = document.querySelector(".button");
+const searchButton = document.querySelector(".search-button");
+console.log(inputButton);
+// Menambahkan event listener pada input untuk mendeteksi ketika tombol "Enter" ditekan
+searchButton.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    inputButton.click();
+  }
+});
 inputButton.addEventListener("click", async function () {
   try {
-    const searchButton = document.querySelector(".search-button");
     const loading = document.querySelector(".loading-spinner");
+
+    // Validasi jika input kosong
+    if (!searchButton.value.trim()) {
+      alert("Teks nya mana oi????");
+      return;
+    }
+
     loading.classList.remove("d-none");
     await showdata(searchButton.value);
     loading.classList.add("d-none");
   } catch (e) {
     const loading = document.querySelector(".loading-spinner");
+    console.log(e);
     alert(e);
     loading.classList.add("d-none");
   }
@@ -42,7 +57,7 @@ async function showDetails(imdbid) {
 }
 
 async function showdata(value) {
-  return fetch("//www.omdbapi.com/?apikey=18d0aa6e&s=" + value)
+  return fetch(`//www.omdbapi.com/?apikey=18d0aa6e&s=${value}&type=movie`)
     .then((response) => response.json())
     .then((response) => {
       if (response.Response === "False") {
